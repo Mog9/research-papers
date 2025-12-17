@@ -20,8 +20,8 @@ test_tfms = transforms.Compose([
                          std=[0.247, 0.243, 0.261])
 ])
 
-train_ds = datasets.CIFAR10(root="data", train=True, download=True, transform=train_tfms)
-test_ds = datasets.CIFAR10(root="data", train=False, download=True, transform=test_tfms)
+train_ds = datasets.CIFAR10(root="data", train=True, download=False, transform=train_tfms)
+test_ds = datasets.CIFAR10(root="data", train=False, download=False, transform=test_tfms)
 
 train_loader =  DataLoader(train_ds, batch_size=16, shuffle=True, num_workers=2)
 val_loader = DataLoader(test_ds, batch_size=16, shuffle=False, num_workers=2)
@@ -88,3 +88,5 @@ for epoch in range(epochs):
 for p in teacher.parameters():
     p.requires_grad = False
 teacher.eval()
+
+torch.save(teacher.state_dict(), "teacher_cifar10.pth")

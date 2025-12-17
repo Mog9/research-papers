@@ -1,0 +1,8 @@
+*.pth
+*.pt
+*.ckpt
+data/
+*.tar.gz
+*.zip
+__pycache__/
+*.pyc
