@@ -45,7 +45,6 @@ optimizer = optim.SGD(
     weight_decay=0.0001
 )
 
-
 def train_teacher(model, loader):
     model.train()
     total_loss = 0
