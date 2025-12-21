@@ -38,7 +38,7 @@ class BasicBlock(nn.Module):
             kernel_size=3,
             stride=1,
             padding=1,
-            bias=True
+            bias=False
         )
 
         self.bn2 = nn.BatchNorm2d(out_channels)
@@ -62,7 +62,7 @@ class BasicBlock(nn.Module):
         out = self.bn2(out)
         
         out = out + self.shortcut(x)
-        out = F.relu(x)
+        out = F.relu(out)
             
         return out
         
