@@ -3,13 +3,13 @@ import torch.nn as nn
 import torch.nn.functional as F 
 from base_block import BasicBlock
 
-class Resnet18(nn.Module):
+class Resnet18_cifar(nn.Module):
     def __init__(self, num_classes=10):
         super().__init__()
         self.in_channels = 16
 
         #stem
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=3, bias=False)
+        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=3, bias=False)
         self.bn1 = nn.BatchNorm2d(16)
         self.relu = nn.ReLU(inplace=False)
 
