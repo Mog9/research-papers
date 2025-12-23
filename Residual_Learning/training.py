@@ -14,6 +14,7 @@ train_transform = transforms.Compose([
     transforms.RandomCrop(32, padding=4),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
+    transforms.RandomErasing(p=0.5),
     transforms.Normalize(
         mean=(0.4914, 0.4822, 0.4465),
         std=(0.2023, 0.1994, 0.2010)
@@ -46,20 +47,20 @@ test_loader = torch.utils.data.DataLoader(
 
 
 
-EPOCHS = 20
+EPOCHS = 60
 model = Resnet18_cifar(num_classes=10).to(device)
-criterion = torch.nn.CrossEntropyLoss()
+criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
 
 optimizer = torch.optim.SGD(
     model.parameters(),
-    lr=0.05,
+    lr=0.1,
     momentum=0.9,
     weight_decay=5e-4
 )
 
 scheduler = torch.optim.lr_scheduler.MultiStepLR(
     optimizer,
-    milestones=[40, 60],
+    milestones=[30, 45],
     gamma=0.1
 )
 
